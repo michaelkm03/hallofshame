@@ -525,6 +525,53 @@
       to   { transform: scaleY(1); opacity: 1; }
     }
 
+    /* === RESPONSIVE === */
+    @media (max-width: 900px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .hero {
+        padding: 2rem 1rem 1.5rem;
+      }
+
+      .potm-section {
+        flex-direction: column;
+        padding: 2rem 1.25rem;
+        gap: 1.5rem;
+        text-align: center;
+      }
+      .potm-divider { display: none; }
+      .potm-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        width: 100%;
+      }
+      .potm-avatar {
+        width: min(100%, 280px);
+        min-height: 200px;
+      }
+      .potm-name { font-size: 1.3rem; }
+      .potm-nick { font-size: 0.42rem; }
+      .potm-reason { font-size: 1rem; text-align: left; }
+
+      .punishment-section { padding: 2rem 1.25rem; }
+      .punishment-title { font-size: 0.6rem; letter-spacing: 0.08em; }
+      .punishment-decree { font-size: 1rem; }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem 2rem;
+        gap: 1rem;
+      }
+      .tcard-name { font-size: 0.85rem; }
+      .tcard-avatar { width: 120px; height: 120px; font-size: 2.6rem; }
+      .progress-label { flex-direction: column; gap: 0.2rem; }
+    }
+
     /* === FOOTER === */
     footer {
       background: #000;
