@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall of Shame | Poochball.com</title>
+  <meta name="description" content="The official Hall of Shame — honoring those who didn't read the book. Pooch of the Month announced monthly.">
+  <meta property="og:title" content="Hall of Shame | Poochball.com">
+  <meta property="og:description" content="The official Hall of Shame — honoring those who didn't read the book.">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --hot-pink: #ff006e;
+      --electric-blue: #00f5ff;
+      --neon-yellow: #ffff00;
+      --neon-green: #39ff14;
+      --purple: #bf00ff;
+      --dark: #050508;
+      --card-bg: #0a0a12;
+    }
+
+    body {
+      background: var(--dark);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* === HERO === */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,0,110,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(0,245,255,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 0%, rgba(191,0,255,0.1) 0%, transparent 50%);
+    }
+
+    .insert-coin {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: var(--neon-yellow);
+      letter-spacing: 0.2em;
+      animation: blink 1.2s step-end infinite;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      position: relative;
+    }
+    .hero-title .line1 {
+      color: var(--electric-blue);
+      text-shadow: 0 0 10px var(--electric-blue), 0 0 30px var(--electric-blue), 0 0 60px var(--electric-blue);
+    }
+    .hero-title .line2 {
+      color: var(--hot-pink);
+      text-shadow: 0 0 10px var(--hot-pink), 0 0 30px var(--hot-pink), 0 0 60px var(--hot-pink);
+    }
+
+    /* Ticker */
+    .ticker-wrap {
+      background: var(--hot-pink);
+      padding: 0.4rem 0;
+      overflow: hidden;
+      margin: 0;
+    }
+    .ticker {
+      display: flex;
+      animation: ticker 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker span {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.45rem;
+      color: #000;
+      padding: 0 2rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* === SECTION HEADER === */
+    .section-header {
+      text-align: center;
+      padding: 2.5rem 1rem 1rem;
+    }
+    .section-header h2 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+      color: var(--neon-green);
+      text-shadow: 0 0 8px var(--neon-green);
+      letter-spacing: 0.1em;
+    }
+    .pixel-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 1rem auto;
+    }
+    .pixel-divider i {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--hot-pink);
+      box-shadow: 0 0 6px var(--hot-pink);
+    }
+    .pixel-divider i:nth-child(2) { background: var(--electric-blue); box-shadow: 0 0 6px var(--electric-blue); }
+    .pixel-divider i:nth-child(3) { background: var(--neon-yellow); box-shadow: 0 0 6px var(--neon-yellow); }
+    .pixel-divider span {
+      display: inline-block;
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--hot-pink), var(--electric-blue));
+      box-shadow: 0 0 4px var(--hot-pink);
+    }
+
+    /* === TRADING CARDS === */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .tcard {
+      background: var(--card-bg);
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .tcard::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--c1, #ff006e), var(--c2, #00f5ff));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+    .tcard:hover { transform: scale(1.03) rotate(-0.5deg); }
+    .tcard:hover .tcard-glow { opacity: 1; }
+
+    .tcard-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .tcard-top {
+      padding: 0.75rem 1rem 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #111;
+    }
+    .tcard-year {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.45rem;
+      color: var(--c1, #ff006e);
+    }
+    .tcard-rank {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.45rem;
+      color: #333;
+    }
+
+    .tcard-avatar-wrap {
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+    .tcard-avatar {
+      width: 100px; height: 100px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      position: relative;
+    }
+    .tcard-avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%);
+    }
+
+    /* === CARD TYPE BADGE === */
+    .card-type {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #111;
+    }
+    .card-type-icon { font-size: 0.7rem; }
+
+    /* Did Not Read — pink */
+    .type-dnr { color: var(--hot-pink); background: rgba(255,0,110,0.06); }
+    .type-dnr .card-type-icon { filter: drop-shadow(0 0 4px var(--hot-pink)); }
+
+    /* Incomplete — amber */
+    .type-incomplete { color: #ff9500; background: rgba(255,149,0,0.06); }
+    .type-incomplete .card-type-icon { filter: drop-shadow(0 0 4px #ff9500); }
+
+    /* Progress bar */
+    .progress-wrap {
+      margin: 0 1rem;
+      padding: 0.5rem 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid #ff9500;
+    }
+    .progress-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.38rem;
+      color: #ff9500;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+    }
+    .progress-bar-bg {
+      height: 6px;
+      background: #1a1a1a;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff9500, #ffcc00);
+      box-shadow: 0 0 6px #ff9500;
+      border-radius: 3px;
+    }
+
+    .tcard-body {
+      padding: 0.75rem 1rem;
+    }
+    .tcard-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tcard-nick {
+      font-size: 0.8rem;
+      color: var(--c1, #ff006e);
+      text-shadow: 0 0 6px var(--c1, #ff006e);
+      margin-bottom: 0.5rem;
+    }
+    .tcard-desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #aaa;
+    }
+
+    .tcard-stats {
+      display: flex;
+      border-top: 1px solid #111;
+      margin-top: 0.75rem;
+    }
+    .stat {
+      flex: 1;
+      padding: 0.5rem;
+      text-align: center;
+      border-right: 1px solid #111;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.35rem;
+      color: #444;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .stat-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--c2, #00f5ff);
+    }
+
+    /* === POOCH OF THE MONTH === */
+    .potm-section {
+      background: linear-gradient(135deg, #120015, #07000d);
+      border-top: 3px solid var(--hot-pink);
+      border-bottom: 3px solid var(--hot-pink);
+      padding: 3rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      box-shadow: 0 0 80px rgba(255,0,110,0.18) inset;
+    }
+    .potm-label-block {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .potm-crown {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 0 14px var(--neon-yellow));
+    }
+    .potm-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.75rem;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 10px var(--neon-yellow);
+      letter-spacing: 0.15em;
+      display: block;
+      text-transform: uppercase;
+      line-height: 2.2;
+    }
+    .potm-month {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      color: #666;
+      letter-spacing: 0.1em;
+      margin-top: 0.25rem;
+      display: block;
+    }
+    .potm-divider {
+      width: 2px;
+      height: 140px;
+      background: linear-gradient(180deg, transparent, var(--hot-pink), transparent);
+      box-shadow: 0 0 10px var(--hot-pink);
+      flex-shrink: 0;
+    }
+    .potm-card {
+      display: flex;
+      align-items: stretch;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .potm-avatar {
+      width: 220px;
+      min-height: 200px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem; font-weight: 900;
+      background: linear-gradient(135deg, #2a0a1a, #0d0008);
+      color: var(--hot-pink);
+      border: 3px solid var(--hot-pink);
+      box-shadow: 0 0 30px rgba(255,0,110,0.5);
+      flex-shrink: 0;
+    }
+    .potm-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem; font-weight: 900;
+      color: var(--hot-pink);
+      text-shadow: 0 0 16px var(--hot-pink);
+    }
+    .potm-nick {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      color: #666;
+      margin: 0.4rem 0 0.75rem;
+      letter-spacing: 0.1em;
+    }
+    .potm-reason {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.15rem;
+      color: #bbb;
+      max-width: 460px;
+      line-height: 1.6;
+    }
+    .potm-badge {
+      background: var(--hot-pink);
+      color: #000;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+      display: inline-block;
+      margin-top: 0.75rem;
+    }
+
+    /* === PUNISHMENT SECTION === */
+    .punishment-section {
+      background: linear-gradient(135deg, #0a0005, #050010);
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+      padding: 2.5rem 2rem;
+    }
+    .punishment-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .punishment-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.9rem;
+      color: var(--hot-pink);
+      text-shadow: 0 0 10px var(--hot-pink), 0 0 30px var(--hot-pink);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.25rem;
+      animation: blink 1.5s step-end infinite;
+    }
+    .punishment-decree {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.15rem;
+      color: #bbb;
+      line-height: 1.7;
+    }
+    .punishment-decree strong { color: #fff; }
+
+    /* === MARIO STRIP === */
+    .mario-strip {
+      height: 150px;
+      overflow: hidden;
+      background: var(--dark);
+      position: relative;
+    }
+    #mario-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    /* === NINTENDO POTM ANIMATION === */
+    .potm-section { position: relative; }
+
+    .potm-flash {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      z-index: 20;
+      animation: potmFlashOut 0.45s 0.05s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes potmFlashOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    .potm-star {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      animation: potmStarPulse 1.8s ease-in-out infinite alternate;
+    }
+    @keyframes potmStarPulse {
+      0% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; }
+      100% { opacity: 0.15; transform: scale(1) rotate(45deg); }
+    }
+
+    .potm-crown       { animation: nintendoPop   0.55s 0.45s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+    .potm-label       { animation: slideDown      0.38s 0.72s ease-out both; }
+    .potm-month       { animation: slideDown      0.38s 0.88s ease-out both; }
+    .potm-divider     { transform-origin: top; animation: growDiv 0.45s 0.98s ease-out both; }
+    .potm-avatar      { animation: slamInLeft     0.42s 1.12s cubic-bezier(0.22,1,0.36,1) both; }
+    .potm-info        { animation: slideInRight   0.42s 1.28s ease-out both; }
+    .potm-badge       { animation: nintendoPop   0.5s  1.62s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+
+    @keyframes nintendoPop {
+      0%   { transform: scale(0);    opacity: 0; }
+      65%  { transform: scale(1.25); opacity: 1; }
+      82%  { transform: scale(0.93); }
+      100% { transform: scale(1); }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-28px); opacity: 0; }
+      to   { transform: translateY(0);     opacity: 1; }
+    }
+    @keyframes slamInLeft {
+      0%   { transform: translateX(-140px) scale(0.85); opacity: 0; }
+      68%  { transform: translateX(10px)   scale(1.04); opacity: 1; }
+      100% { transform: translateX(0)      scale(1); }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(60px); opacity: 0; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+    @keyframes growDiv {
+      from { transform: scaleY(0); opacity: 0; }
+      to   { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 2px solid var(--hot-pink);
+    }
+    footer p {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.45rem;
+      color: #333;
+      line-height: 2.2;
+    }
+    footer p strong { color: var(--electric-blue); }
+    .game-over {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1rem;
+      color: var(--hot-pink);
+      text-shadow: 0 0 10px var(--hot-pink);
+      margin-bottom: 1rem;
+      animation: blink 1.5s step-end infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1 class="hero-title">
+      <span class="line1">HALL</span><br>
+      <span class="line2">OF SHAME</span>
+    </h1>
+  </header>
+
+  <!-- MARIO STRIP -->
+  <div class="mario-strip">
+    <canvas id="mario-canvas"></canvas>
+  </div>
+
+  <!-- POOCH OF THE MONTH -->
+  <div class="potm-section" id="potm">
+    <div class="potm-flash"></div>
+    <div class="potm-label-block">
+      <span class="potm-crown">📖</span>
+      <span class="potm-label">Pooch of<br>the Month</span>
+      <span class="potm-month">JUNE 2026</span>
+    </div>
+    <div class="potm-divider"></div>
+    <div class="potm-card">
+      <div class="potm-avatar" style="padding:0;overflow:hidden;">
+        <img src="scott_mx.JPG" alt="Scott Hummel" style="width:100%;height:100%;object-fit:cover;object-position:60% 30%;display:block;">
+      </div>
+      <div class="potm-info">
+        <div class="potm-name">Scott Hummel</div>
+        <div class="potm-nick">WHITE NOISE — DON DELILLO</div>
+        <div class="potm-reason">A monument to intellectual laziness. DeLillo spent years crafting a meditation on death, consumerism, and modern anxiety. Scott spent that time not reading it. He arrived with opinions anyway. They were wrong.</div>
+        <span class="potm-badge">⭐ THIS MONTH'S HONOREE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+      <span>★ SCOTT HUMMEL IS THE POOCH OF THE MONTH ★</span>
+    </div>
+  </div>
+
+  <!-- PUNISHMENT RULES -->
+  <div class="punishment-section">
+    <div class="punishment-inner">
+      <div class="punishment-title">⚔️ PUNISHMENT ⚔️</div>
+      <p class="punishment-decree">Each disgraced Pooch is condemned to a live 60-second plot summary before the group — followed by open interrogation. ❌ NO NOTES, NO PHONES ❌</p>
+    </div>
+  </div>
+
+  <!-- SECTION HEADER -->
+  <div class="section-header">
+    <h2>▶ PAST POOCHES ◀</h2>
+    <div class="pixel-divider">
+      <span></span><i></i><i></i><i></i><span></span>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards-grid" id="cards">
+
+    <!-- Michael Montgomery — DID NOT READ -->
+    <div class="tcard" style="--c1:#ff006e;--c2:#00f5ff;">
+      <div class="tcard-glow"></div>
+      <div class="tcard-top">
+        <div class="tcard-year">2025</div>
+        <div class="tcard-rank"></div>
+      </div>
+      <div class="tcard-avatar-wrap">
+        <div class="tcard-avatar" style="padding:0;overflow:hidden;">
+          <img src="michael_montgomery.JPG" alt="Michael Montgomery" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;">
+        </div>
+      </div>
+      <div class="progress-wrap" style="border-left-color:#ff006e;">
+        <div class="progress-label" style="color:#ff006e;">
+          <span>THE LEFT HAND OF DARKNESS · LE GUIN</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff006e,#ff69b4);box-shadow:0 0 6px #ff006e;"></div>
+        </div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-name">Michael Montgomery</div>
+        <div class="tcard-nick">The Left Hand of Darkness — Ursula K. Le Guin</div>
+        <div class="tcard-desc">Le Guin built an entire world, a language, and a philosophy. Michael couldn't be bothered. 286 pages stood between him and basic literary credibility. He looked at those pages and chose himself. Truly a failure of historic proportions.</div>
+      </div>
+      <div class="tcard-stats">
+        <div class="stat"><span class="stat-label">PGS READ</span><span class="stat-val">0</span></div>
+        <div class="stat"><span class="stat-label">EXCUSES</span><span class="stat-val">∞</span></div>
+        <div class="stat"><span class="stat-label">SHAME</span><span class="stat-val">MAX</span></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      <strong>HALL OF SHAME · POOCHBALL.COM</strong> · EST. 2024<br>
+      SELECTION COMMITTEE: 3 PEOPLE WHO READ THE BOOK · 1 WHO ALSO DIDN'T<br>
+      ALL RECORDS FINAL · ALL EXCUSES LOGGED · WIKIPEDIA IS NOT A SUBSTITUTE<br>
+      INSERT BOOKMARK TO PLAY AGAIN
+    </p>
+  </footer>
+
+  <script>
+  // === MARIO CANVAS ANIMATION ===
+  (function() {
+    const canvas = document.getElementById('mario-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const PX = 3;
+
+    const C = {
+      r: '#dd2200', p: '#f8a060', b: '#2244cc', w: '#7a3400',
+      y: '#ffdd00', m: '#dd1100', W: '#ffffff',
+      g: '#cc8800', e: '#885500', '.': null
+    };
+
+    const SP = {
+      mario1: [
+        '....rrrrr...',
+        '...rrrrrrr..',
+        '...wwpwpww..',
+        '..wpppppppw.',
+        '..wpppppwww.',
+        '...ppppww...',
+        '...rrbrrr...',
+        '..rrrbrrrr..',
+        '.rrrrbbbbrr.',
+        'rrrrbbbbbrrr',
+        '.rbbbbbbbr..',
+        '..rbb..bbr..',
+        '..www..www..',
+        '.www....www.',
+      ],
+      mario2: [
+        '....rrrrr...',
+        '...rrrrrrr..',
+        '...wwpwpww..',
+        '..wpppppppw.',
+        '..wpppppwww.',
+        '...ppppww...',
+        '...rrbrrr...',
+        '..rrrbrrrr..',
+        '.rrrrbbbbrr.',
+        'rrrrbbbbbrrr',
+        '.rbbbbbbbr..',
+        '..rbbbbbbr..',
+        '..www.www...',
+        '...ww...ww..',
+      ],
+      shroom: [
+        '....mmmm....',
+        '..mmmmmmmm..',
+        '.mmmWmmWmmm.',
+        'mmWmmmmmmWmm',
+        'mmmmmmmmmmmm',
+        '.mmmmmmmmmm.',
+        '..wwwwwwww..',
+        '..wwwwwwww..',
+        '...wwwwww...',
+      ],
+      qblock: [
+        'ggggggggg',
+        'geeeeeeeg',
+        'ge..yy..g',
+        'ge.yyyy.g',
+        'ge..yy..g',
+        'ge..yy..g',
+        'geeeeeeeg',
+        'ggggggggg',
+      ],
+      coin:  ['..yyy..', '.yyyyy.', 'yyyyyyy', '.yyyyy.', '..yyy..'],
+      coinN: ['..yy...', '..yy...', '..yy...', '..yy...', '..yy...'],
+    };
+
+    const spW = n => SP[n][0].length * PX;
+    const spH = n => SP[n].length    * PX;
+
+    function drawSp(name, x, y) {
+      SP[name].forEach((row, ry) =>
+        [...row].forEach((ch, rx) => {
+          const col = C[ch]; if (!col) return;
+          ctx.fillStyle = col;
+          ctx.fillRect(Math.round(x + rx * PX), Math.round(y + ry * PX), PX, PX);
+        })
+      );
+    }
+
+    const SCENE = [
+      { type: 'qblock', relX: 0.15 },
+      { type: 'qblock', relX: 0.38 },
+      { type: 'shroom',  relX: 0.56 },
+      { type: 'qblock', relX: 0.72 },
+      { type: 'shroom',  relX: 0.88 },
+    ];
+
+    const OBJ = SCENE.map(() => ({ blockBounce: 0, cooldown: 0, shroomSquish: 0 }));
+
+    let W = 0, H = 0;
+    function resize() {
+      const nw = canvas.offsetWidth || window.innerWidth;
+      const nh = canvas.offsetHeight || 150;
+      if (canvas.width !== nw || canvas.height !== nh) { canvas.width = nw; canvas.height = nh; }
+      W = nw; H = nh;
+    }
+
+    const SPEED   = 1.8;
+    const BRICK   = 16 * PX;
+    const GRAVITY = 0.30;
+    const JUMP_V  = -5.5;
+    const HOP_V   = -3.0;
+    let t      = 0;
+    let marioX = -spW('mario1');
+    let mOffY  = 0;
+    let mVY    = 0;
+    let mJump  = false;
+
+    function loop() {
+      resize();
+      ctx.clearRect(0, 0, W, H);
+      t++;
+
+      const groundY = H - 8 * PX;
+      const mH      = spH('mario1');
+      const mW      = spW('mario1');
+      const standY  = groundY - mH;
+      const qbH     = spH('qblock');
+      const qbBaseY = standY - qbH - 8 * PX;
+      const mCenter = marioX + mW / 2;
+
+      // Trigger jump (qblock) or hop (mushroom)
+      if (!mJump) {
+        for (let i = 0; i < SCENE.length; i++) {
+          const obj = SCENE[i];
+          const o   = OBJ[i];
+          if (o.cooldown > 0) { o.cooldown--; continue; }
+          const dist = obj.relX * W - mCenter;
+          if (obj.type === 'qblock' && dist > 2 && dist < 20) {
+            mJump = true; mVY = JUMP_V; break;
+          }
+          if (obj.type === 'shroom' && dist > -6 && dist < 6) {
+            mJump = true; mVY = HOP_V;
+            o.shroomSquish = 14; o.cooldown = 160; break;
+          }
+        }
+      }
+
+      // Physics
+      if (mJump) {
+        mOffY += mVY;
+        mVY   += GRAVITY;
+        // Head-butt Q-block detection (only while rising)
+        if (mVY < 0) {
+          const headY = standY + mOffY;
+          for (let i = 0; i < SCENE.length; i++) {
+            const obj = SCENE[i]; if (obj.type !== 'qblock') continue;
+            const o   = OBJ[i];  if (o.cooldown > 0) continue;
+            if (Math.abs(obj.relX * W - mCenter) < spW('qblock') / 2 + 6 &&
+                headY <= qbBaseY + qbH + 5) {
+              mVY = 0.8; o.blockBounce = 20; o.cooldown = 220;
+            }
+          }
+        }
+        if (mOffY >= 0) { mOffY = 0; mVY = 0; mJump = false; }
+      }
+
+      OBJ.forEach(o => { if (o.blockBounce > 0) o.blockBounce--; if (o.shroomSquish > 0) o.shroomSquish--; });
+
+      // Ground bricks
+      const scrollOff = (t * SPEED * 0.5) % BRICK;
+      ctx.fillStyle = '#884400';
+      ctx.fillRect(0, groundY, W, 8 * PX);
+      ctx.fillStyle = '#3a1800';
+      for (let bx = -scrollOff; bx < W; bx += BRICK) ctx.fillRect(Math.round(bx), groundY, 1, 8 * PX);
+      ctx.fillRect(0, groundY + 4 * PX, W, 1);
+
+      // Scene objects
+      SCENE.forEach((obj, i) => {
+        const o = OBJ[i], x = obj.relX * W;
+        if (obj.type === 'qblock') {
+          const idleBob = Math.sin(t * 0.055 + i) * 1.5;
+          const hitOff  = o.blockBounce > 0 ? -Math.sin(o.blockBounce / 20 * Math.PI) * 10 : 0;
+          const by = qbBaseY + idleBob + hitOff;
+          drawSp('qblock', x - spW('qblock') / 2, by);
+          const cn = Math.floor(t / 6) % 2 === 0 ? 'coin' : 'coinN';
+          drawSp(cn, x - spW(cn) / 2, by - spH(cn) - PX);
+        } else {
+          const bob    = Math.sin(t * 0.05 + obj.relX * 8) * 1.5;
+          const squish = o.shroomSquish > 0 ? Math.sin(o.shroomSquish / 14 * Math.PI) * 4 : 0;
+          drawSp('shroom', x - spW('shroom') / 2, groundY - spH('shroom') + bob + squish);
+        }
+      });
+
+      // Mario
+      marioX += SPEED;
+      if (marioX > W + mW) marioX = -mW;
+      drawSp(mJump ? 'mario1' : (Math.floor(t / 7) % 2 === 0 ? 'mario1' : 'mario2'), marioX, standY + mOffY);
+
+      requestAnimationFrame(loop);
+    }
+    resize();
+    loop();
+  })();
+  </script>
+
+  <script>
+    (function() {
+      const potm = document.getElementById('potm');
+      if (!potm) return;
+      const colors = ['#ff006e','#00f5ff','#ffff00','#39ff14','#bf00ff'];
+      for (let i = 0; i < 22; i++) {
+        const s = document.createElement('div');
+        s.className = 'potm-star';
+        const size = Math.random() > 0.55 ? 4 : 2;
+        s.style.cssText =
+          'left:'    + (Math.random() * 96 + 2).toFixed(1)   + '%' +
+          ';top:'    + (Math.random() * 88 + 6).toFixed(1)   + '%' +
+          ';width:'  + size + 'px;height:' + size            + 'px' +
+          ';background:' + colors[Math.floor(Math.random() * colors.length)] +
+          ';animation-delay:'    + (Math.random() * 2.5 + 1.2).toFixed(2) + 's' +
+          ';animation-duration:' + (Math.random() * 2.0 + 1.2).toFixed(2) + 's';
+        potm.appendChild(s);
+      }
+    })();
+  </script>
+</body>
+</html>
